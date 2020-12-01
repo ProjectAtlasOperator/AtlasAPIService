@@ -1,6 +1,6 @@
 ## Docker build
 
-    docker build . --file Dockerfile --tag marianferenc/project_atlas_cluster_processor_service:latest
+    docker build . --file Dockerfile --tag marianferenc/project_atlas_api_service:latest
 	
 ## Kubernetes deployment
 
