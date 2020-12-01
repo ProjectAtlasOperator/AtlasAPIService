@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pods Metadata</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+    <h1>Pod Information</h1>
+    <tr text-align="left">
+        <th class="centered">NAME</th>
+        <th class="centered">NAMESPACE</th>
+        <th class="centered">PHASE</th>
+        <th class="centered">POD IP</th>
+        <th class="centered">HOST IP</th>
+        <th class="centered">START TIME</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <%= for (pod) in pods.Items { %>
+    <tr>
+        <td class="centered">
+            <%= pod.Name %>
+        </td>
+        <td class="centered">
+            <%= pod.Namespace %>
+        </td>
+        <td class="centered">
+            <%= pod.Status.Phase %>
+        </td>
+        <td class="centered">
+            <%= pod.Status.PodIP %>
+        </td>
+        <td class="centered">
+            <%= pod.Status.HostIP %>
+        </td>
+        <td class="centered">
+            <%= pod.Status.StartTime %>
+        </td>
+
+    </tr>
+    <% } %>
+
+    <tr>
+        <th>IMAGE</th>
+        <th>IMAGE NAME</th>
+    </tr>
+    <tr>
+        <td class="centered"> <%= image %></td>
+        <td class="centered"> <%= imageName %></td>
+    </tr>
+
+    <tr>
+        <th class="centered">NAME</th>
+        <th class="centered">CPU</th>
+        <th class="centered">MEMORY</th>
+    </tr>
+    <tr>
+        <td class="centered"><%= NAME %></td>
+        <td class="centered"><%= CPU %></td>
+        <td class="centered"><%= MEMORY %></td>
+    </tr>
+
+    <tr>
+        <th class="centered">CONFIGMAP NAME</th>
+        <th class="centered">CONFIGMAP DATA</th>
+    </tr>
+    <tr>
+        <td class="centered"><%= cfm %></td>
+        <td class="centered"><%= cfm_data %></td>
+    </tr>
+
+    <tr>
+        <th class="centered">VOLUME</th>
+        <th class="centered">MOUTH PATH</th>
+    </tr>
+    <tr>
+        <td class="centered"><%= volumeName %></td>
+        <td class="centered"><%= mountPath %></td>
+    </tr>
+
+    <tr>
+        <th class="centered">NODE NAME</th>
+        <th class="centered">NODE MEMORY</th>
+    </tr>
+    <tr>
+        <td class="centered"><%= nodeName %></td>
+        <td class="centered"><%= nodeMemory %></td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>
