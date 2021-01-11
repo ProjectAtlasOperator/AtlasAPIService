@@ -12,5 +12,5 @@
     
 ## Forward deployed application to localhost
 
-    kubectl port-forward svc/atlas-api-service 3000:3000 --namespace project-atlas-system
+    kubectl port-forward svc/atlas-api-service 33000:3003 --namespace project-atlas-system
     

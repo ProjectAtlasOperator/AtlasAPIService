@@ -2,7 +2,6 @@ package actions
 
 import (
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -17,7 +16,7 @@ import (
 // a home page.
 func RetrieveData(c buffalo.Context) error {
 
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://username:password@10.97.103.216:27017"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://username:password@mongodb-service:27017"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,7 +27,7 @@ func RetrieveData(c buffalo.Context) error {
 		log.Fatal(err)
 	}
 
-	collection := client.Database("project-atlas").Collection("volume")
+	collection := client.Database("pods").Collection("podInformation")
 	cursor, err := collection.Find(ctx, bson.M{})
 	if err != nil {
 		log.Fatal(err)
@@ -37,11 +36,27 @@ func RetrieveData(c buffalo.Context) error {
 	if err = cursor.All(ctx, &volumes); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(volumes)
 	for _, volume := range volumes {
-		fmt.Println(volume["podname"])
-		fmt.Println(volume["volumename"])
+		c.Set("podName", volume["podName"])
+		c.Set("namespace", volume["namespace"])
+		c.Set("hostIp", volume["hostIp"])
+		c.Set("podIP", volume["podIP"])
+		c.Set("startTime", volume["startTime"])
+		c.Set("volumePodName", volume["volumePodName"])
+		c.Set("volumeName", volume["volumeName"])
+		c.Set("volumeMount", volume["volumeMount"])
+		c.Set("cpuPodName", volume["cpuPodName"])
+		c.Set("cpuUsage", volume["cpuUsage"])
+		c.Set("memoryUsage", volume["memoryUsage"])
+		c.Set("imageName", volume["imageName"])
+		c.Set("mountPath", volume["mountPath"])
+		c.Set("configMapName", volume["configMapName"])
+		c.Set("NodeName", volume["NodeName"])
+		c.Set("nodeMemory", volume["nodeMemory"])
+		c.Set("mdbPort", volume["mdbPort"])
+		c.Set("mExpressPort", volume["mExpressPort"])
+		c.Set("cpsPort", volume["cpsPort"])
 	}
 
-	return c.Render(http.StatusOK, r.HTML("retrieve_data.plush.html"))
+	return c.Render(http.StatusOK, r.HTML("retrieve_data.html"))
 }
