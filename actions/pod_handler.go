@@ -33,7 +33,7 @@ func PodInfoHander(c buffalo.Context) error {
 		log.Fatal(err)
 	}
 
-	res, err := http.Get("http://10.111.92.42:3000/api/podInformation/")
+	res, err := http.Get("http://cluster-processor-service:3000/api/podInformation/")
 
 	if err != nil {
 		panic(err.Error())
@@ -45,7 +45,7 @@ func PodInfoHander(c buffalo.Context) error {
 	json.Unmarshal(data, &podInfo)
 	res.Body.Close()
 
-	collection := client.Database("pods").Collection("podInformation")
+	collection := client.Database("allPods").Collection("podInformation")
 	_, err = collection.InsertOne(ctx, podInfo)
 	if err != nil {
 		log.Fatal(err)

@@ -5,25 +5,32 @@
     <title>Pod Information</title>
 </head>
 <body>
-
-    <h1 class="centered"> <%= podName %></h1>
-    <h1 class="centered"> <%= namespace %></h1>
-    <h1 class="centered"> <%= hostIp %></h1>
-    <h1 class="centered"> <%= podIP %></h1>
-    <h1 class="centered"> <%= startTime %></h1>
-    <h1 class="centered"> <%= volumePodName %></h1>
-    <h1 class="centered"> <%= volumeName %></h1>
-    <h1 class="centered"> <%= volumeMount %></h1>
-    <h1 class="centered"> <%= cpuPodName %></h1>
-    <h1 class="centered"> <%= cpuUsage %></h1>
-    <h1 class="centered"> <%= memoryUsage %></h1>
-    <h1 class="centered"> <%= imageName %></h1>
-    <h1 class="centered"> <%= mountPath %></h1>
-    <h1 class="centered"> <%= configMapName %></h1>
-    <h1 class="centered"> <%= NodeName %></h1>
-    <h1 class="centered"> <%= nodeMemory %></h1>
-    <h1 class="centered"> <%= mdbPort %></h1>
-    <h1 class="centered"> <%= mExpressPort %></h1>
-    <h1 class="centered"> <%= cpsPort %></h1>
+    <table class="table table-striped">
+        <thead>
+        <h1 class="centered">Pod Information</h1>
+        <tr text-align="left">
+            <th class="centered">NAME</th>
+            <th class="centered">HOST IP</th>
+            <th class="centered">POD IP</th>
+            <th class="centered">NAMESPACE</th>
+        </tr>
+        </thead>
+            <%= for (dt) in id { %>
+            <tr>
+                <td class="centered">
+                    <%= dt["podName"] %>
+                </td>
+                <td class="centered">
+                    <%= dt["hostIp"] %>
+                </td>
+                <td class="centered">
+                    <%= dt["podIP"] %>
+                </td>
+                <td class="centered">
+                    <%= dt["namespace"] %>
+                </td>
+            </tr>
+            <% } %>
+    </table>
 </body>
 </html>
