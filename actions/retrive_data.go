@@ -2,15 +2,11 @@ package actions
 
 import (
 	"context"
-	"fmt"
-	"github.com/olekukonko/tablewriter"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"net/http"
-	"os"
-	"strings"
 	"time"
 
 	"github.com/gobuffalo/buffalo"
@@ -46,39 +42,39 @@ func RetrieveData(c buffalo.Context) error {
 		c.Set("id", volume["podInformations"])
 	}
 
-	tableString := &strings.Builder{}
-	table := tablewriter.NewWriter(tableString)
-
-	data := [][]string{
-		[]string{"Pali", "The Good", "500"},
-		[]string{"Gabi", "The Very very Bad Man", "288"},
-		[]string{"C", "The Ugly", "120"},
-		[]string{"D", "The Gopher", "800"},
-	}
-
-	//table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Name", "Sign", "Rating"})
-
-	for _, v := range data {
-		table.Append(v)
-	}
-
-	f, err := os.Create("data.txt")
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer f.Close()
-	table.Render() // Send output
-	fmt.Println(tableString.String())
-	_, err2 := f.WriteString(tableString.String())
-
-	if err2 != nil {
-		log.Fatal(err2)
-	}
-
-	fmt.Println("done")
+	//tableString := &strings.Builder{}
+	//table := tablewriter.NewWriter(tableString)
+	//
+	//data := [][]string{
+	//	[]string{"Pali", "The Good", "500"},
+	//	[]string{"Gabi", "The Very very Bad Man", "288"},
+	//	[]string{"C", "The Ugly", "120"},
+	//	[]string{"D", "The Gopher", "800"},
+	//}
+	//
+	//table = tablewriter.NewWriter(os.Stdout)
+	//table.SetHeader([]string{"Name", "Sign", "Rating"})
+	//
+	//for _, v := range data {
+	//	table.Append(v)
+	//}
+	//
+	//f, err := os.Create("data.txt")
+	//
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//
+	//defer f.Close()
+	//table.Render() // Send output
+	//fmt.Println(tableString.String())
+	//_, err2 := f.WriteString(tableString.String())
+	//
+	//if err2 != nil {
+	//	log.Fatal(err2)
+	//}
+	//
+	//fmt.Println("done")
 
 	return c.Render(http.StatusOK, r.HTML("retrieve_data.html"))
 }
